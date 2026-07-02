@@ -1,5 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import Ticker from '../components/Ticker.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -21,10 +22,13 @@ interface Props {
     <BaseHead {...Astro.props} />
   </head>
   <body class="flex min-h-screen flex-col">
-    <Header />
-    <main class="flex-1">
-      <slot />
-    </main>
+    <Ticker />
+    <div class="flex flex-1 flex-col md:flex-row">
+      <Header />
+      <main class="min-w-0 flex-1">
+        <slot />
+      </main>
+    </div>
     <Footer />
 
     <!-- 滚动淡入：元素进入视口时加 .is-visible -->

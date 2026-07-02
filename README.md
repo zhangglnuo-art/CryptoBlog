@@ -23,7 +23,7 @@ src/
   components/            ← Header / Footer / PostCard / BaseHead(SEO)
   layouts/              ← BaseLayout(全站) / PostLayout(文章页)
   pages/                ← 首页 / blog 列表 / [slug] 详情 / tags / rss / robots
-  styles/global.css      ← 设计令牌与杂志编辑风主题（纸张 / 墨 / 朱红）
+  styles/global.css      ← 设计令牌与交易终端风主题（深色 / 等宽 / 绿涨红跌）
 public/                 ← favicon、封面图等静态资源
 scripts/new-post.mjs    ← 一键新建草稿
 ```

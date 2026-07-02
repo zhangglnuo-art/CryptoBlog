@@ -1,42 +1,48 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import FormattedDate from './FormattedDate.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
-  /** 序号；传入则在行首显示编号（如 01、02） */
+  /** 序号；传入则在行首显示 #编号 */
   n?: number;
 }
 const { post, n } = Astro.props;
 const { title, description, pubDate, tags } = post.data;
 const url = `/blog/${post.id}`;
 const num = n != null ? String(n).padStart(2, '0') : null;
+const dateStr = pubDate
+  .toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' })
+  .replace(/\//g, '.');
 ---
 
 <a
   href={url}
-  class="reveal group grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 border-b border-line py-7 sm:grid-cols-[3.5rem_1fr_auto] sm:gap-x-8"
+  class="reveal group relative block border-b border-line px-4 py-3.5 transition-colors hover:bg-cyan/[0.04]"
 >
-  {
-    num && (
-      <span class="font-serif text-xl font-semibold tabular-nums text-muted transition-colors group-hover:text-accent sm:text-2xl">
-        {num}
-      </span>
-    )
-  }
-  <div class="min-w-0">
-    <div class="mb-2 flex flex-wrap gap-x-3 gap-y-1">
-      {tags.slice(0, 3).map((t) => <span class="tag">{t}</span>)}
-    </div>
-    <h3 class="font-serif text-2xl font-semibold leading-snug text-ink transition-colors group-hover:text-accent sm:text-[1.7rem]">
-      {title}
-    </h3>
-    <p class="mt-2 line-clamp-2 max-w-2xl text-[15px] leading-relaxed text-ink-soft">
-      {description}
-    </p>
+  <span
+    class="absolute left-0 top-0 h-full w-0.5 bg-transparent transition-colors group-hover:bg-cyan"
+    aria-hidden="true"
+  ></span>
+
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px]">
+    <time class="tabular-nums text-muted">{dateStr}</time>
+    {num && <span class="text-muted">#{num}</span>}
+    <span class="flex flex-wrap gap-1.5">
+      {tags.slice(0, 2).map((t) => <span class="chip">{t}</span>)}
+    </span>
   </div>
-  <div class="col-start-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted sm:col-start-3 sm:self-center sm:text-right">
-    <FormattedDate date={pubDate} />
-    <span class="mt-1 hidden text-ink transition-colors group-hover:text-accent sm:block">阅读 →</span>
-  </div>
+
+  <h3 class="mt-2 font-mono text-[15px] font-semibold leading-snug text-ink transition-colors group-hover:text-cyan sm:text-base">
+    {title}
+  </h3>
+  <p class="mt-1 line-clamp-2 max-w-3xl text-[13px] leading-relaxed text-ink-soft">
+    {description}
+  </p>
+
+  <span
+    class="pointer-events-none absolute right-4 top-3.5 hidden font-mono text-xs text-muted transition-colors group-hover:text-cyan sm:inline"
+    aria-hidden="true"
+  >
+    OPEN →
+  </span>
 </a>

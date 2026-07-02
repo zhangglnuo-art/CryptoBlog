@@ -1,7 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" fill="#16130d"/>
-  <text x="32" y="33" font-family="Georgia, 'Songti SC', 'Noto Serif SC', serif"
-        font-size="40" font-weight="600" fill="#f5f1e8"
-        text-anchor="middle" dominant-baseline="central">链</text>
-  <rect x="12" y="50" width="40" height="3" fill="#d8371a"/>
+  <rect width="64" height="64" fill="#06090d"/>
+  <!-- K 线蜡烛图 -->
+  <g stroke-width="4" stroke-linecap="butt">
+    <!-- 绿涨 -->
+    <line x1="18" y1="14" x2="18" y2="50" stroke="#16d982"/>
+    <rect x="13" y="24" width="10" height="18" fill="#16d982"/>
+    <!-- 红跌 -->
+    <line x1="34" y1="18" x2="34" y2="54" stroke="#ff5069"/>
+    <rect x="29" y="30" width="10" height="16" fill="#ff5069"/>
+    <!-- 绿涨 -->
+    <line x1="50" y1="10" x2="50" y2="44" stroke="#16d982"/>
+    <rect x="45" y="18" width="10" height="20" fill="#16d982"/>
+  </g>
 </svg>

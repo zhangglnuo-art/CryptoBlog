@@ -1,59 +1,74 @@
 ---
-import { SITE_NAME, SITE_LATIN, NAV_LINKS } from '../consts';
+// 左侧终端侧栏：品牌 + 导航 + 板块分类。桌面竖排吸顶，移动端顶部横排。
+import { SITE_NAME, SITE_LATIN, NAV_LINKS, CATEGORIES } from '../consts';
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href);
-const today = new Date().toLocaleDateString('zh-CN', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const catActive = (tag: string) => path === `/tags/${encodeURIComponent(tag)}`;
 ---
 
-<header class="bg-paper">
-  <!-- 顶部行：定位 + 日期，等宽小型大写 -->
-  <div class="mx-auto max-w-5xl px-4">
-    <div class="flex items-center justify-between border-b border-line py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-      <span>加密货币 · Web3 · 独立阅读</span>
-      <span class="hidden sm:inline">{today}</span>
-    </div>
+<aside
+  class="border-b border-line bg-panel md:sticky md:top-9 md:h-[calc(100vh-2.25rem)] md:w-60 md:shrink-0 md:overflow-y-auto md:border-b-0 md:border-r"
+>
+  <!-- 品牌 -->
+  <a href="/" class="group flex items-center gap-2.5 border-b border-line px-4 py-3.5">
+    <span class="grid h-8 w-8 place-items-center border border-up/60 font-mono text-sm font-bold text-up">
+      ◧
+    </span>
+    <span class="leading-tight">
+      <span class="block font-mono text-base font-bold text-ink">
+        {SITE_NAME}<span class="up blink">_</span>
+      </span>
+      <span class="block font-mono text-[10px] tracking-widest text-muted">{SITE_LATIN}</span>
+    </span>
+  </a>
 
-    <!-- 报头：大衬线刊名 -->
-    <div class="py-9 text-center sm:py-12">
-      <a href="/" class="inline-block">
-        <h1 class="font-serif text-6xl font-semibold leading-none tracking-tight text-ink sm:text-7xl">
-          {SITE_NAME}
-        </h1>
-      </a>
-      <p class="mt-3 font-mono text-[11px] uppercase tracking-[0.4em] text-accent">
-        {SITE_LATIN}
-      </p>
+  <!-- 导航 + 板块 -->
+  <nav class="flex items-stretch gap-1 overflow-x-auto px-2 py-2 font-mono text-xs md:flex-col md:gap-0 md:overflow-visible md:px-0 md:py-3">
+    <div class="hidden px-4 pb-1.5 pt-1 text-[10px] uppercase tracking-widest text-muted md:block">
+      // menu
     </div>
-  </div>
+    {
+      NAV_LINKS.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'shrink-0 whitespace-nowrap px-3 py-2 uppercase tracking-wider transition-colors md:px-4',
+            isActive(link.href)
+              ? 'text-cyan md:border-l-2 md:border-cyan md:bg-cyan/5'
+              : 'text-ink-soft hover:text-cyan md:border-l-2 md:border-transparent',
+          ]}
+        >
+          <span class="text-muted">&gt;</span> {link.label}
+        </a>
+      ))
+    }
 
-  <!-- 导航：细长条，双线上边框，滚动时吸顶 -->
-  <nav class="sticky top-0 z-40 border-y border-double border-t-[3px] border-ink bg-paper/95 backdrop-blur-sm">
-    <div class="mx-auto flex max-w-5xl items-center justify-center gap-7 px-4 py-3 font-mono text-xs uppercase tracking-[0.18em]">
-      {
-        NAV_LINKS.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              'transition-colors',
-              isActive(link.href) ? 'text-accent' : 'text-ink hover:text-accent',
-            ]}
-          >
-            {link.label}
-          </a>
-        ))
-      }
-      <a
-        href="/rss.xml"
-        class="text-muted transition-colors hover:text-accent"
-        aria-label="RSS 订阅"
-      >
-        RSS
-      </a>
+    <div class="mx-1 hidden border-t border-line md:my-3 md:block" />
+    <div class="hidden px-4 pb-1.5 pt-1 text-[10px] uppercase tracking-widest text-muted md:block">
+      // sectors
     </div>
+    {
+      CATEGORIES.map((tag) => (
+        <a
+          href={`/tags/${tag}`}
+          class:list={[
+            'shrink-0 whitespace-nowrap px-3 py-2 uppercase tracking-wider transition-colors md:px-4',
+            catActive(tag)
+              ? 'text-cyan md:border-l-2 md:border-cyan md:bg-cyan/5'
+              : 'text-ink-soft hover:text-cyan md:border-l-2 md:border-transparent',
+          ]}
+        >
+          <span class="text-up">▸</span> {tag}
+        </a>
+      ))
+    }
+
+    <a
+      href="/rss.xml"
+      class="shrink-0 whitespace-nowrap px-3 py-2 uppercase tracking-wider text-muted transition-colors hover:text-cyan md:mt-1 md:border-l-2 md:border-transparent md:px-4"
+    >
+      <span class="text-muted">&gt;</span> RSS
+    </a>
   </nav>
-</header>
+</aside>

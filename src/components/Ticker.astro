@@ -1,0 +1,31 @@
+---
+// 顶部行情跑马灯 —— 纯装饰性视觉元素（示意行情，非实时数据）。
+const items = [
+  { s: 'BTC', p: '68,420', c: '+2.34%', up: true },
+  { s: 'ETH', p: '3,542', c: '+1.08%', up: true },
+  { s: 'SOL', p: '168.4', c: '-0.82%', up: false },
+  { s: 'BNB', p: '604.1', c: '+0.46%', up: true },
+  { s: 'USDT', p: '1.000', c: '+0.01%', up: true },
+  { s: 'ARB', p: '0.842', c: '-1.24%', up: false },
+  { s: 'MATIC', p: '0.523', c: '+3.11%', up: true },
+  { s: 'AVAX', p: '34.62', c: '-0.55%', up: false },
+];
+// 复制一份，实现无缝滚动
+const loop = [...items, ...items];
+---
+
+<div class="ticker sticky top-0 z-50 h-9 border-b border-line bg-panel/95 backdrop-blur-sm">
+  <div class="ticker-track flex h-9 items-center font-mono text-[11px]">
+    {
+      loop.map((it) => (
+        <span class="inline-flex items-center gap-1.5">
+          <span class="text-ink-soft">{it.s}</span>
+          <span class="text-ink">{it.p}</span>
+          <span class={it.up ? 'up' : 'down'}>
+            {it.up ? '▲' : '▼'} {it.c}
+          </span>
+        </span>
+      ))
+    }
+  </div>
+</div>

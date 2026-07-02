@@ -3,37 +3,44 @@ import { SITE_NAME, SITE_TAGLINE } from '../consts';
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-28 rule-double bg-paper">
-  <div class="mx-auto grid max-w-5xl gap-10 px-4 py-14 md:grid-cols-[2fr_1fr_1fr]">
+<footer class="border-t border-line bg-panel">
+  <div class="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:grid-cols-[2fr_1fr_1fr]">
     <div>
-      <div class="font-serif text-3xl font-semibold text-ink">{SITE_NAME}</div>
-      <p class="mt-3 max-w-sm text-sm leading-relaxed text-ink-soft">
-        {SITE_TAGLINE}跨链、DeFi、稳定币与钱包安全，用大白话讲清楚，
-        希望对同样在探索 Web3 的你有帮助。
+      <div class="font-mono text-lg font-bold text-ink">{SITE_NAME}<span class="up">_</span></div>
+      <p class="mt-2 max-w-sm text-sm leading-relaxed text-ink-soft">
+        {SITE_TAGLINE}跨链、DeFi、稳定币与钱包安全，用大白话讲清楚。
       </p>
     </div>
 
     <div>
-      <div class="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">栏目</div>
-      <ul class="space-y-2 text-sm text-ink">
-        <li><a class="transition-colors hover:text-accent" href="/tags/跨链">跨链 / 跨链桥</a></li>
-        <li><a class="transition-colors hover:text-accent" href="/tags/DeFi">DeFi</a></li>
-        <li><a class="transition-colors hover:text-accent" href="/tags/稳定币">稳定币</a></li>
-        <li><a class="transition-colors hover:text-accent" href="/tags/钱包安全">钱包安全</a></li>
+      <div class="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">// sectors</div>
+      <ul class="space-y-1.5 font-mono text-sm text-ink-soft">
+        <li><a class="transition-colors hover:text-cyan" href="/tags/跨链">跨链 / 跨链桥</a></li>
+        <li><a class="transition-colors hover:text-cyan" href="/tags/DeFi">DeFi</a></li>
+        <li><a class="transition-colors hover:text-cyan" href="/tags/稳定币">稳定币</a></li>
+        <li><a class="transition-colors hover:text-cyan" href="/tags/钱包安全">钱包安全</a></li>
       </ul>
     </div>
 
     <div>
-      <div class="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">站点</div>
-      <ul class="space-y-2 text-sm text-ink">
-        <li><a class="transition-colors hover:text-accent" href="/blog">全部文章</a></li>
-        <li><a class="transition-colors hover:text-accent" href="/about">关于本站</a></li>
-        <li><a class="transition-colors hover:text-accent" href="/rss.xml">RSS 订阅</a></li>
+      <div class="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">// menu</div>
+      <ul class="space-y-1.5 font-mono text-sm text-ink-soft">
+        <li><a class="transition-colors hover:text-cyan" href="/blog">全部文章</a></li>
+        <li><a class="transition-colors hover:text-cyan" href="/about">关于本站</a></li>
+        <li><a class="transition-colors hover:text-cyan" href="/rss.xml">RSS 订阅</a></li>
       </ul>
     </div>
   </div>
 
-  <div class="border-t border-line py-6 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-    © {year} {SITE_NAME} · 仅供科普与学习 · 不构成投资建议
+  <!-- 状态栏 -->
+  <div class="border-t border-line px-4 py-2.5">
+    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 font-mono text-[11px] text-muted">
+      <span class="flex items-center gap-1.5">
+        <span class="up">●</span> LIVE
+        <span class="mx-1 text-line">|</span>
+        {SITE_NAME} // TERMINAL
+      </span>
+      <span>© {year} · 仅供科普学习 · 不构成投资建议</span>
+    </div>
   </div>
 </footer>
