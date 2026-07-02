@@ -2,10 +2,9 @@
  * 全站配置中心。改站名、域名、外链地址都在这里改一处即可。
  */
 
-// 博客正式域名。
-// ⚠️ 部署到 Vercel 后，把这里改成 Vercel 分配的域名（如 https://crypto-blog-xxx.vercel.app）
-//    或你绑定的自定义域名，否则 sitemap / canonical / RSS 里的绝对地址会不对。
-export const SITE_URL = 'https://cryptoblog.vercel.app';
+// 博客正式域名。Vercel 分配域名 / 自定义域名。
+// 换域名（比如以后绑定自己的域名）只改这一处即可。
+export const SITE_URL = 'https://crypto-blog-phi.vercel.app';
 
 export const SITE_TITLE = '链读 · Web3 笔记';
 export const SITE_DESCRIPTION =
