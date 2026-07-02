@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const featured = posts.find((p) => p.data.featured) ?? posts[0];
+const rest = posts.filter((p) => p.id !== featured?.id).slice(0, 6);
+
+const topics = ['跨链桥', '跨链兑换', 'DEX', '稳定币', 'DeFi', '钱包安全'];
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="relative overflow-hidden border-b border-white/5">
+    <div class="mx-auto max-w-5xl px-4 py-20 sm:py-28">
+      <div class="reveal">
+        <span class="eyebrow">// Web3 · Crypto · On-Chain</span>
+      </div>
+
+      <h1 class="reveal mt-5 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-6xl">
+        读懂 <span class="gradient-text">区块链</span> 与<br class="hidden sm:block" />
+        加密世界的运行逻辑
+      </h1>
+
+      <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+        跨链桥怎么运作、DEX 和中心化交易所差在哪、稳定币是否真的稳、钱包私钥该如何保管——
+        这里把加密圈里那些绕不开的概念，用大白话一篇篇讲清楚。写给自己，也希望帮到你。
+      </p>
+
+      <div class="reveal mt-9 flex flex-wrap items-center gap-4">
+        <a href="/blog" class="btn-glow">
+          浏览全部文章
+          <span aria-hidden="true">→</span>
+        </a>
+        <a href="/about" class="btn-ghost">关于本站</a>
+      </div>
+
+      <!-- 主题标签行 -->
+      <div class="reveal mt-10 flex flex-wrap gap-2.5">
+        {topics.map((t) => <span class="chip">{t}</span>)}
+      </div>
+
+      <!-- 数据条 -->
+      <div class="reveal mt-14 grid max-w-2xl grid-cols-3 gap-4">
+        <div class="glass rounded-2xl px-5 py-4">
+          <div class="text-3xl font-extrabold text-ink">{posts.length}</div>
+          <div class="mt-1 text-xs text-muted">篇文章</div>
+        </div>
+        <div class="glass rounded-2xl px-5 py-4">
+          <div class="text-3xl font-extrabold text-ink">
+            {new Set(posts.flatMap((p) => p.data.tags)).size}
+          </div>
+          <div class="mt-1 text-xs text-muted">个主题</div>
+        </div>
+        <div class="glass rounded-2xl px-5 py-4">
+          <div class="text-3xl font-extrabold gradient-text">∞</div>
+          <div class="mt-1 text-xs text-muted">持续更新</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-4 py-16">
+    {
+      featured && (
+        <a
+          href={`/blog/${featured.id}`}
+          class="card reveal group mb-14 grid overflow-hidden md:grid-cols-2"
+        >
+          {featured.data.cover ? (
+            <img
+              src={featured.data.cover}
+              alt={featured.data.title}
+              class="aspect-[16/10] w-full object-cover opacity-90 transition duration-500 group-hover:scale-[1.03] group-hover:opacity-100 md:aspect-auto md:h-full"
+            />
+          ) : (
+            <div class="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-gradient-to-br from-brand-700/40 via-surface to-neon-violet/25 text-3xl font-bold md:aspect-auto">
+              <span class="gradient-text">{featured.data.tags[0] ?? '精选'}</span>
+              <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(130,150,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(130,150,255,0.08)_1px,transparent_1px)] bg-[size:32px_32px]" />
+            </div>
+          )}
+          <div class="flex flex-col justify-center p-8">
+            <span class="eyebrow">置顶阅读</span>
+            <h2 class="mt-3 text-2xl font-bold leading-snug text-ink transition-colors group-hover:text-neon-cyan">
+              {featured.data.title}
+            </h2>
+            <p class="mt-3 line-clamp-3 text-muted">{featured.data.description}</p>
+            <span class="mt-5 text-sm font-semibold text-neon-cyan">阅读全文 →</span>
+          </div>
+        </a>
+      )
+    }
+
+    <div class="reveal mb-8 flex items-end justify-between">
+      <div>
+        <span class="eyebrow">Latest</span>
+        <h2 class="mt-2 text-2xl font-bold text-ink">最新文章</h2>
+      </div>
+      <a href="/blog" class="text-sm font-medium text-neon-cyan hover:underline">
+        查看全部 →
+      </a>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {rest.map((post) => <PostCard post={post} />)}
+    </div>
+  </div>
+</BaseLayout>

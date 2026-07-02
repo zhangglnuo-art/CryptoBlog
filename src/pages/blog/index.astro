@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// 收集所有标签做筛选入口
+const tagCount = new Map<string, number>();
+for (const p of posts) {
+  for (const t of p.data.tags) tagCount.set(t, (tagCount.get(t) ?? 0) + 1);
+}
+const tags = [...tagCount.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<BaseLayout
+  title="全部文章"
+  description="区块链与加密货币科普合集：跨链桥、跨链兑换、DEX、稳定币、DeFi 与钱包安全的全部图文教程。"
+>
+  <div class="mx-auto max-w-6xl px-4 py-12">
+    <header class="reveal mb-8">
+      <span class="eyebrow">Archive</span>
+      <h1 class="mt-2 text-3xl font-extrabold text-ink">全部文章</h1>
+      <p class="mt-2 text-muted">共 {posts.length} 篇 · 区块链原理、链上实操与安全经验</p>
+    </header>
+
+    {
+      tags.length > 0 && (
+        <div class="reveal mb-10 flex flex-wrap gap-2">
+          {tags.map(([tag, count]) => (
+            <a href={`/tags/${tag}`} class="chip">
+              {tag} <span class="ml-1 text-muted">{count}</span>
+            </a>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+  </div>
+</BaseLayout>

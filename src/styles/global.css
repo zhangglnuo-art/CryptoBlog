@@ -1,0 +1,352 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* ============================================================
+   设计令牌 —— 加密圈 / Web3 多链霓虹风
+   深空底 + 青(公链)→紫(以太)→金(比特)三色霓虹，暗示「跨链」。
+   ink / muted 为浅色，页面里所有 text-ink / text-muted 自动适配深底。
+   ============================================================ */
+@theme {
+  --color-brand-50: #f0edff;
+  --color-brand-100: #ddd6ff;
+  --color-brand-200: #c3b5ff;
+  --color-brand-300: #a288ff;
+  --color-brand-400: #8b6bff;
+  --color-brand-500: #7c5cff;
+  --color-brand-600: #6a3fff;
+  --color-brand-700: #5a2fe0;
+  --color-brand-800: #4623ab;
+  --color-brand-900: #2f1875;
+
+  /* 霓虹点缀 —— 多链色 */
+  --color-neon-cyan: #2fe6ff;
+  --color-neon-violet: #b06bff;
+  --color-neon-mint: #23e39a; /* 涨/成功/链上绿 */
+  --color-gold: #ffcc4d; /* 比特金 */
+
+  /* 深色画布 */
+  --color-void: #05060e;
+  --color-surface: #0a0c1a;
+
+  /* 文本（浅色，用于深底） */
+  --color-ink: #e9ecfb;
+  --color-muted: #8a94b6;
+
+  --font-sans:
+    'Inter', system-ui, -apple-system, 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-mono:
+    'JetBrains Mono', 'SFMono-Regular', 'Menlo', 'Consolas', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background: var(--color-void);
+}
+
+body {
+  @apply text-ink antialiased;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(1200px 600px at 12% -10%, rgba(124, 92, 255, 0.2), transparent 60%),
+    radial-gradient(1000px 700px at 100% 0%, rgba(47, 230, 255, 0.12), transparent 55%),
+    radial-gradient(900px 600px at 80% 100%, rgba(255, 204, 77, 0.08), transparent 55%),
+    var(--color-void);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(47, 230, 255, 0.28);
+  color: #fff;
+}
+
+/* 细腻的滚动条，贴合暗色主题 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+/* ============================================================
+   背景装饰层 —— 极光光斑 + 透视网格（固定在最底层）
+   ============================================================ */
+.fx-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 缓慢漂移的极光光团 */
+.fx-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.fx-orb--cyan {
+  width: 42rem;
+  height: 42rem;
+  top: -12rem;
+  left: -10rem;
+  background: radial-gradient(circle, rgba(47, 230, 255, 0.5), transparent 68%);
+  animation: orb-a 22s ease-in-out infinite;
+}
+.fx-orb--violet {
+  width: 40rem;
+  height: 40rem;
+  top: 20%;
+  right: -12rem;
+  background: radial-gradient(circle, rgba(176, 107, 255, 0.5), transparent 68%);
+  animation: orb-b 26s ease-in-out infinite;
+}
+.fx-orb--gold {
+  width: 34rem;
+  height: 34rem;
+  bottom: -14rem;
+  left: 28%;
+  background: radial-gradient(circle, rgba(255, 204, 77, 0.32), transparent 68%);
+  animation: orb-a 30s ease-in-out infinite reverse;
+}
+
+/* 透视网格 */
+.fx-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(130, 150, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(130, 150, 255, 0.06) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+@keyframes orb-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6rem, 4rem, 0) scale(1.12); }
+}
+@keyframes orb-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-5rem, 3rem, 0) scale(0.92); }
+}
+
+/* ============================================================
+   可复用组件类
+   ============================================================ */
+
+/* 玻璃拟态表面 */
+.glass {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* 渐变霓虹文字 —— 青→紫→金，跨链三色 */
+.gradient-text {
+  background: linear-gradient(100deg, var(--color-neon-cyan), var(--color-neon-violet) 50%, var(--color-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: text-shine 6s linear infinite;
+}
+@keyframes text-shine {
+  to { background-position: 200% center; }
+}
+
+/* 主按钮：霓虹发光 */
+.btn-glow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.85rem;
+  padding: 0.8rem 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(100deg, var(--color-brand-600), var(--color-brand-500));
+  box-shadow: 0 0 0 1px rgba(150, 130, 255, 0.35) inset, 0 10px 30px -10px rgba(124, 92, 255, 0.7);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(150, 130, 255, 0.55) inset, 0 16px 40px -8px rgba(124, 92, 255, 0.85);
+}
+
+/* 幽灵按钮 */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.85rem;
+  padding: 0.8rem 1.4rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.btn-ghost:hover {
+  border-color: rgba(47, 230, 255, 0.5);
+  background: rgba(47, 230, 255, 0.06);
+}
+
+/* 卡片：玻璃 + 渐变描边 + 悬停发光上浮 */
+.card {
+  position: relative;
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(130deg, rgba(47, 230, 255, 0.5), transparent 35%, transparent 65%, rgba(176, 107, 255, 0.5));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 60px -24px rgba(47, 230, 255, 0.35), 0 12px 40px -20px rgba(176, 107, 255, 0.3);
+}
+.card:hover::before {
+  opacity: 1;
+}
+
+/* 标签胶囊 */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-neon-cyan);
+  background: rgba(47, 230, 255, 0.08);
+  border: 1px solid rgba(47, 230, 255, 0.2);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.chip:hover {
+  background: rgba(47, 230, 255, 0.16);
+  border-color: rgba(47, 230, 255, 0.4);
+}
+
+/* 分区标题上方的小徽标 */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+}
+.eyebrow::before {
+  content: '';
+  width: 1.6rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-neon-cyan));
+}
+
+/* ============================================================
+   滚动淡入动画（由 BaseLayout 的 IntersectionObserver 触发）
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-orb,
+  .gradient-text { animation: none !important; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   文章正文排版 —— 暗色 prose 覆盖
+   ============================================================ */
+.prose {
+  --tw-prose-body: #c4cbe0;
+  --tw-prose-headings: #f2f5ff;
+  --tw-prose-lead: #aeb8cf;
+  --tw-prose-links: var(--color-neon-cyan);
+  --tw-prose-bold: #eef2ff;
+  --tw-prose-counters: #8a94b6;
+  --tw-prose-bullets: #4d5578;
+  --tw-prose-hr: rgba(255, 255, 255, 0.08);
+  --tw-prose-quotes: #d5ddf0;
+  --tw-prose-quote-borders: var(--color-brand-500);
+  --tw-prose-captions: #8a94b6;
+  --tw-prose-code: #8be9ff;
+  --tw-prose-pre-code: #d5ddf0;
+  --tw-prose-pre-bg: #070912;
+  --tw-prose-th-borders: rgba(255, 255, 255, 0.14);
+  --tw-prose-td-borders: rgba(255, 255, 255, 0.08);
+  max-width: none;
+}
+.prose :where(h2):not(:where([class~='not-prose'] *)) {
+  @apply mt-12 scroll-mt-24 pl-3 text-2xl;
+  border-left: 3px solid transparent;
+  border-image: linear-gradient(180deg, var(--color-neon-cyan), var(--color-neon-violet)) 1;
+}
+.prose :where(h3):not(:where([class~='not-prose'] *)) {
+  @apply mt-8 scroll-mt-24 text-xl;
+}
+.prose :where(a):not(:where([class~='not-prose'] *)) {
+  @apply font-medium no-underline underline-offset-4 hover:underline;
+}
+.prose :where(blockquote):not(:where([class~='not-prose'] *)) {
+  @apply rounded-r-lg py-1 not-italic;
+  background: rgba(47, 230, 255, 0.06);
+  border-left-color: var(--color-neon-cyan);
+}
+.prose :where(code):not(:where([class~='not-prose'] *)):not(pre code) {
+  background: rgba(139, 233, 255, 0.1);
+  padding: 0.15em 0.4em;
+  border-radius: 0.35rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+.prose :where(code):not(:where([class~='not-prose'] *))::before,
+.prose :where(code):not(:where([class~='not-prose'] *))::after {
+  content: none;
+}
+.prose :where(table):not(:where([class~='not-prose'] *)) {
+  @apply text-sm;
+}
+.prose :where(thead th):not(:where([class~='not-prose'] *)) {
+  color: #f2f5ff;
+}
+.prose :where(strong):not(:where([class~='not-prose'] *)) {
+  color: #eef2ff;
+}

@@ -1,0 +1,32 @@
+/**
+ * 全站配置中心。改站名、域名、外链地址都在这里改一处即可。
+ */
+
+// 博客正式域名。
+// ⚠️ 部署到 Vercel 后，把这里改成 Vercel 分配的域名（如 https://crypto-blog-xxx.vercel.app）
+//    或你绑定的自定义域名，否则 sitemap / canonical / RSS 里的绝对地址会不对。
+export const SITE_URL = 'https://cryptoblog.vercel.app';
+
+export const SITE_TITLE = '链读 · Web3 笔记';
+export const SITE_DESCRIPTION =
+  '一个聚焦区块链与加密货币的学习笔记站。跨链桥、DEX、稳定币、钱包安全、DeFi 原理与链上实操经验，用大白话讲清楚，持续更新。';
+
+// 引流目标：AllSwap 跨链兑换。文章正文里按需在相关语境自然引用，不做全站硬广。
+// 换域名或加 UTM 只需改这一处。
+export const ALLSWAP_URL = 'https://allswap.io/zh-hans';
+export const ALLSWAP_BRAND = 'AllSwap 跨链兑换';
+
+// 带 UTM 参数的落地链接，便于在目标站分析里区分博客带来的流量。
+// 想让某个文章内链接带追踪时用它；纯自然链接直接写 Markdown 即可。
+export const allswapLink = (campaign = 'blog') =>
+  `${ALLSWAP_URL}?utm_source=chaindu&utm_medium=article&utm_campaign=${campaign}`;
+
+// 导航栏
+export const NAV_LINKS = [
+  { label: '首页', href: '/' },
+  { label: '文章', href: '/blog' },
+  { label: '关于', href: '/about' },
+];
+
+// 每页文章数（分页用）
+export const POSTS_PER_PAGE = 9;
