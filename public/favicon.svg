@@ -1,18 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2fe6ff"/>
-      <stop offset="0.5" stop-color="#7c5cff"/>
-      <stop offset="1" stop-color="#ffcc4d"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="#05060e"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.5"/>
-  <!-- 跨链 swap 双箭头 -->
-  <g fill="none" stroke="url(#g)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M18 25 h24"/>
-    <path d="M36 18 l7 7 -7 7"/>
-    <path d="M46 39 h-24"/>
-    <path d="M28 46 l-7 -7 7 -7"/>
-  </g>
+  <rect width="64" height="64" fill="#16130d"/>
+  <text x="32" y="33" font-family="Georgia, 'Songti SC', 'Noto Serif SC', serif"
+        font-size="40" font-weight="600" fill="#f5f1e8"
+        text-anchor="middle" dominant-baseline="central">链</text>
+  <rect x="12" y="50" width="40" height="3" fill="#d8371a"/>
 </svg>

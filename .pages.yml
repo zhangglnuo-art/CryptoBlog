@@ -57,7 +57,7 @@ content:
         label: 封面图（可选）
         type: image
         required: false
-        description: 建议 1200×630；不传会用默认渐变占位
+        description: 建议 1200×630；仅显示在文章页顶部，列表为纯文字编号索引
       - name: author
         label: 作者
         type: string

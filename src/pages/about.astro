@@ -7,12 +7,18 @@ import { SITE_TITLE } from '../consts';
   title="关于本站"
   description={`${SITE_TITLE}：一个聚焦区块链与加密货币的学习笔记与科普博客。`}
 >
-  <div class="mx-auto max-w-3xl px-4 py-12">
-    <span class="eyebrow">About</span>
-    <h1 class="mt-2 text-3xl font-extrabold text-ink">关于本站</h1>
-    <div class="prose prose-lg mt-6">
+  <div class="mx-auto max-w-2xl px-4 py-14">
+    <header class="reveal border-b-2 border-ink pb-6">
+      <p class="kicker">About / 关于</p>
+      <h1 class="mt-4 font-serif text-5xl font-semibold tracking-tight text-ink sm:text-6xl">
+        关于本站
+      </h1>
+    </header>
+
+    <div class="prose prose-lg mt-8">
       <p>
-        这里是我探索区块链与加密货币过程中的笔记与总结。内容主要围绕：
+        这里是我探索区块链与加密货币过程中的笔记与总结。加密世界名词多、坑也多，
+        本站想做的，就是把那些绕不开的概念用大白话一篇篇讲清楚。内容主要围绕：
       </p>
       <ul>
         <li><strong>跨链与跨链桥</strong>：资产为什么要跨链、跨链桥怎么运作、跨链兑换怎么操作更省心</li>
@@ -21,13 +27,15 @@ import { SITE_TITLE } from '../consts';
         <li><strong>钱包与安全</strong>：私钥、助记词、常见骗局，以及自我保管资产的基本功</li>
       </ul>
       <p>
-        写这些一半是为了整理自己的思路，一半是希望能帮到同样在入门的人。加密世界名词多、坑也多，
-        如果某篇文章帮你少走了弯路，那就是它最大的价值。
+        写这些一半是为了整理自己的思路，一半是希望能帮到同样在入门的人。如果某篇文章帮你少走了弯路，
+        那就是它最大的价值。
       </p>
+      <blockquote>
+        本站所有内容仅为科普与学习参考，不构成任何投资建议。
+      </blockquote>
       <p class="text-sm text-muted">
         说明：文章里偶尔会提到我实际用过的第三方工具或服务（例如跨链兑换平台），部分链接可能带有
-        合作性质，但是否使用完全由你决定；教程本身不依赖任何特定服务也能照做。本站所有内容仅为科普与
-        学习参考，<strong>不构成任何投资建议</strong>，加密资产波动与风险请自行评估。
+        合作性质，但是否使用完全由你决定；教程本身不依赖任何特定服务也能照做。加密资产波动与风险请自行评估。
       </p>
     </div>
   </div>

@@ -21,14 +21,6 @@ interface Props {
     <BaseHead {...Astro.props} />
   </head>
   <body class="flex min-h-screen flex-col">
-    <!-- 加密圈背景装饰层：多链极光光斑 + 透视网格 -->
-    <div class="fx-bg" aria-hidden="true">
-      <div class="fx-orb fx-orb--cyan"></div>
-      <div class="fx-orb fx-orb--violet"></div>
-      <div class="fx-orb fx-orb--gold"></div>
-      <div class="fx-grid"></div>
-    </div>
-
     <Header />
     <main class="flex-1">
       <slot />

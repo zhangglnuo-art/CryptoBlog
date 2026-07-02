@@ -10,6 +10,11 @@ export const SITE_TITLE = '链读 · Web3 笔记';
 export const SITE_DESCRIPTION =
   '一个聚焦区块链与加密货币的学习笔记站。跨链桥、DEX、稳定币、钱包安全、DeFi 原理与链上实操经验，用大白话讲清楚，持续更新。';
 
+// 报头（masthead）用：主刊名、拉丁副题、一句话定位。
+export const SITE_NAME = '链读';
+export const SITE_LATIN = 'CHAINDU · WEB3 READING';
+export const SITE_TAGLINE = '一份关于区块链与加密货币的独立阅读笔记。';
+
 // 引流目标：AllSwap 跨链兑换。文章正文里按需在相关语境自然引用，不做全站硬广。
 // 换域名或加 UTM 只需改这一处。
 export const ALLSWAP_URL = 'https://allswap.io/zh-hans';

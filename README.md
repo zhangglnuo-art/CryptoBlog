@@ -23,7 +23,7 @@ src/
   components/            ← Header / Footer / PostCard / BaseHead(SEO)
   layouts/              ← BaseLayout(全站) / PostLayout(文章页)
   pages/                ← 首页 / blog 列表 / [slug] 详情 / tags / rss / robots
-  styles/global.css      ← 设计令牌与加密圈暗色霓虹主题
+  styles/global.css      ← 设计令牌与杂志编辑风主题（纸张 / 墨 / 朱红）
 public/                 ← favicon、封面图等静态资源
 scripts/new-post.mjs    ← 一键新建草稿
 ```
@@ -58,7 +58,7 @@ SLUG=cross-chain-guide pnpm new "跨链兑换教程" "跨链,跨链兑换"
 | `pubDate` | ✅ | 发布日期 |
 | `updatedDate` |  | 更新日期（更新老文有利 SEO） |
 | `tags` |  | 第一个是主关键词，自动生成标签页 |
-| `cover` |  | 封面图路径，如 `/covers/xxx.jpg`，留空用渐变占位 |
+| `cover` |  | 封面图路径，如 `/covers/xxx.jpg`；仅在文章页顶部显示，列表为纯文字编号索引 |
 | `featured` |  | `true` 置顶到首页精选位 |
 | `draft` |  | `true` 时不进生产构建 |
 
