@@ -4,7 +4,9 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-line bg-panel">
-  <div class="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:grid-cols-[2fr_1fr_1fr]">
+  <div
+    class="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.1fr]"
+  >
     <div>
       <div class="font-mono text-lg font-bold text-ink">{SITE_NAME}<span class="up">_</span></div>
       <p class="mt-2 max-w-sm text-sm leading-relaxed text-ink-soft">
@@ -30,13 +32,11 @@ const year = new Date().getFullYear();
         <li><a class="transition-colors hover:text-cyan" href="/rss.xml">RSS 订阅</a></li>
       </ul>
     </div>
-  </div>
 
-  <!-- 友情链接 -->
-  <div class="border-t border-line">
-    <div class="mx-auto max-w-5xl px-4 py-5">
+    <!-- 友情链接 -->
+    <div>
       <div class="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">// friends</div>
-      <ul class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-sm text-ink-soft">
+      <ul class="space-y-1.5 font-mono text-sm text-ink-soft">
         {
           FRIEND_LINKS.map((link) => (
             <li>
