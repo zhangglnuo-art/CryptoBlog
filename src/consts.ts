@@ -28,6 +28,15 @@ export const ALLSWAP_BRAND = 'AllSwap 跨链兑换';
 export const allswapLink = (campaign = 'blog') =>
   `${ALLSWAP_URL}?utm_source=chaindu&utm_medium=article&utm_campaign=${campaign}`;
 
+// 友情链接：同类科普站 + 跨链兑换主站，展示在页脚。
+// 主站复用上面的常量，换域名时只改一处。
+export const FRIEND_LINKS = [
+  { label: '加密货币研究', href: 'https://coin.ponr.org/' },
+  { label: '链上指南', href: 'https://swap.forlines.org/' },
+  { label: 'IE9 · 加密前沿资讯', href: 'https://www.ie9.cc/' },
+  { label: ALLSWAP_BRAND, href: ALLSWAP_URL },
+];
+
 // 导航栏
 export const NAV_LINKS = [
   { label: '首页', href: '/' },
