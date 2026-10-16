@@ -38,7 +38,7 @@ author: 编辑部
 - **Optimism / Base**：Optimism 系（Base 由 Coinbase 推出），生态增长快
 - **zkSync、Starknet、Linea**：ZK 系代表
 
-它们都大幅降低了手续费，同时继承以太坊的安全性，是现在做链上操作的主要阵地。
+它们都大幅降低了手续费，同时继承以太坊的安全性，是现在做链上操作的主要阵地。前两个阵营是乐观汇总，后面几个是零知识汇总，主网凭什么相信它们，见[两种 Rollup 的区别](/blog/optimistic-vs-zk-rollup)。
 
 ## 怎么把资产转到 L2 上用
 
